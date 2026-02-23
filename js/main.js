@@ -1,21 +1,23 @@
 addEventListener('load', function() {
     document.getElementById('play').addEventListener('click', 
     function(){
-        alert("Comença la partida");
+        let alies = prompt("Identificat amb un alies")
+		console.log(alies);
     });
 
     document.getElementById('options').addEventListener('click', 
     function(){
-        console.error("Opció no implementada");
+        alert("Opcions:");
     });
 
     document.getElementById('saves').addEventListener('click', 
     function(){
-        console.error("Opció no implementada");
+        alert("Partides anteriors:");
     });
 
     document.getElementById('exit').addEventListener('click', 
     function(){
-        console.warn("No es pot sortir!");
+		alert("Sortint....");
+        console.warn("Carregant sortida");
     });
 });

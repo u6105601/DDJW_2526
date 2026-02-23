@@ -1,3 +1,10 @@
+body {
+	font-family: 'Brush Script MT', sans-serif;
+	background-color: orange;
+	font-size: 18px;
+	text-align: center;
+}
+
 #title, .center{
 	display: block;
 	margin-left: auto;
@@ -5,12 +12,30 @@
 }
 
 button.center{
+	font-family: 'Segoe UI', sans-serif;
+	padding: 10px 20px;
+	background-color: purple;
+	color:white;
+	cursor: pointer;
+	font-size: 18px;
+	border-radius: 4px;
 	width: 6rem;
 	height: 3rem;
 	margin-top: 1rem;
 }
 
+button:hover {
+	background-color: blue;
+	font-family: 'Brush Script MT', sans-serif;
+}
+
 #title{
-	color:red;
+	color:blue;
 	text-align: center;
+	font-size: 90px;
+	
+}
+
+#title:hover {
+	color:red;
 }
