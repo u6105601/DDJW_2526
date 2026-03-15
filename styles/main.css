@@ -1,8 +1,13 @@
 body {
-	font-family: 'Brush Script MT', sans-serif;
-	background-color: orange;
-	font-size: 18px;
-	text-align: center;
+    font-family: 'Brush Script MT', sans-serif;
+    background-color: orange;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
 #title, .center{
@@ -38,4 +43,25 @@ button:hover {
 
 #title:hover {
 	color:red;
+}
+
+#game {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#game img {
+    width: 100px;
+    height: 140px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 5px solid black;
+    object-fit: cover;
 }
