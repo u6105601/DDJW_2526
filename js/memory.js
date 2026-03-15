@@ -10,8 +10,8 @@ var game = {
     ready: 0,
     lastCard: null,
     score: 200,
-    pairs: 2
-	isProcessing: false
+    pairs: 2,
+    isProcessing: false
 }
 
 function shuffe(arr){
@@ -38,32 +38,36 @@ export function startGame(){
 export function clickCard(indx){
     if (game.ready < items.length || game.isProcessing || game.lastCard === indx) return;
     goFront(indx);
-    if (game.lastCard === null) game.lastCard = indx; // Primera carta clicada
-    else{ // Teníem carta prèvia
-        if (items[game.lastCard] === items[indx]){
+    if (game.lastCard === null) {
+        game.lastCard = indx;
+    } 
+    else { 
+        if (items[game.lastCard] === items[indx]) {
             game.pairs--;
-            if (game.pairs <= 0){
-                alert(`Has guanyat amb ${game.score} punts!!!!`);
-                window.location.assign("../");
+            game.lastCard = null;
+            if (game.pairs <= 0) {
+                setTimeout(() => {
+                    alert(`Has guanyat amb ${game.score} punts!!!!`);
+                    window.location.assign("../");
+                }, 500);
             }
-        }
+        } 
         else {
-			game.isProcessing = true;
-			
+            game.isProcessing = true;
+            
             setTimeout(function() {
                 goBack(indx);
                 goBack(game.lastCard);
                 
                 game.score -= 25;
-                game.lastCard = null;
-
+                game.lastCard = null; 
+                game.isProcessing = false;
                 if (game.score <= 0) {
                     alert("Game Over");
                     window.location.assign("../");
                 }
             }, 1000);
         }
-        game.lastCard = null;
     }
 }
 
