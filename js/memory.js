@@ -53,7 +53,7 @@ var game = {
         else{ // Nova partida
 			let options = JSON.parse(sessionStorage.getItem("options") || '{"groupSize":2, "cards":2}')
             this.groupSize = parseInt(options.groupSize);
-            this.pairs = parseInt(options.cards);
+            this.pairs = parseInt(options.pairs);
 
             let baseItems = resources.slice(0, this.pairs); 
             this.items = [];
@@ -114,7 +114,7 @@ var game = {
 function shuffe(arr){
     arr.sort(function () {return Math.random() - 0.5});
 }
-export var gameItems = game.items;
+export var gameItems;
 export function selectCards() { 
     game.select(); 
     gameItems = game.items; 
