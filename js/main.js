@@ -1,48 +1,28 @@
 import {$} from "../library/jquery-4.0.0.slim.module.min.js";
-var c1 = $('#play')
-var c2 = $('#options')
-var c3 = $('#saves')
-var c4 = $('#exit')
 
-c1.on('click', 
-function(){
-    let alies = prompt("Identificat amb un alies")
-	console.log(alies);
-    window.location.assign("./html/game.html");
-});
-
-c2.on('click', 
-function(){
-    alert("Opcions:");
-});
-
-addEventListener('load', function() {
-    document.getElementById('play').addEventListener('click', 
+$(document).ready(function() {
+    $('#play').on('click', 
     function(){
-        sessionStorage.removeItem('load');
+        let alias = prompt("Enter your alias:");
+		if (!alias) return;
+    
+		sessionStorage.setItem("alias", alias);
+		sessionStorage.removeItem('load');
+		
+		let mode = confirm("Press OK for Mode 1 (Custom) or Cancel for Mode 2 (Progressive)");
+		sessionStorage.setItem("gameMode", mode ? "1" : "2");
         window.location.assign("./html/game.html");
     });
 
-    document.getElementById('options').addEventListener('click', 
+    $('#options').on('click', 
     function(){
         window.location.assign("./html/options.html");
     });
 
-    document.getElementById('saves').addEventListener('click', 
+    $('#saves').on('click', 
     function(){
-        let to_load = localStorage.save;
-        fetch('../php/load.php', {
-            method: "POST",
-            body: JSON.stringify({}),
-            headers: {"Content-type": "application/json; charset=UTF-8"}
-        })
-        .then(response => response.json())
-        .then(json => to_load = (!json.error)?JSON.stringify(json.save): localStorage.save)
-        .catch (err => {
-            console.error(err);
-            console.warn("La partida s'intentarà carregar de local");
-        });
-
+        let to_load = localStorage.getItem("save");
+        
         if (!to_load) {
             alert("No hi ha cap partida a carregar");
             return;
@@ -50,15 +30,7 @@ addEventListener('load', function() {
         sessionStorage.load = to_load;
         window.location.assign("./html/game.html");
     });
-
-
-c3.on('click', 
-function(){
-	alert("Partides anteriors:");
-});
-
-c4.on('click', 
-function(){
-	alert("Sortint....");
-	console.warn("Carregant sortida");
+	$('#exit').on('click', function() {
+        alert("Sortint....");
+    });
 });
