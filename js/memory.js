@@ -17,9 +17,7 @@ var game = {
     lastCard: null,
     score: 200,
     pairs: 2,
-
     isProcessing: false
-
     goBack: function(idx){
         this.setValue && this.setValue[idx](back);
         this.states[idx] = StateCard.ENABLE;
@@ -125,6 +123,7 @@ export function initCard(callback) {
     if (!game.setValue) game.setValue = [];
     game.setValue.push(callback); 
 }
+<<<<<<< HEAD
 
 export function clickCard(indx){
     if (game.ready < items.length || game.isProcessing || game.lastCard === indx) return;
@@ -171,6 +170,8 @@ function goFront(idx){
     setValue(idx, items[idx]);
     clickOff(idx);
 
+=======
+>>>>>>> uppstream/master
 export function saveGame(){
     game.save();
 }
