@@ -85,9 +85,15 @@ var game = {
             this.score = toLoad.score;
             this.pairs = toLoad.pairs;
 			this.groupSize = toLoad.groupSize || 2;
+			sessionStorage.removeItem("load");
         }
         else{ // Nova partida
-			let options = JSON.parse(sessionStorage.getItem("options") || '{"groupSize":2, "cards":2}')
+			let mode = sessionStorage.getItem("gameMode") || "1";
+            let optionsKey = (mode === "2" && sessionStorage.getItem("progressiveOptions")) 
+                             ? "progressiveOptions" 
+                             : "options";
+							 
+			let options = JSON.parse(sessionStorage.getItem(optionsKey) || '{"groupSize":2, "cards":2}')
             this.groupSize = parseInt(options.groupSize) || 2;
             this.pairs = parseInt(options.pairs) || 2;
 			
@@ -137,23 +143,22 @@ var game = {
                     setTimeout(() => {
                         let mode = sessionStorage.getItem("gameMode") || "1";
 
-                        if (mode === "2") {
-                            alert(`Nivell completat! Puntuació acumulada: ${this.score}. Preparem el següent nivell...`);
+						if (mode === "2") {
+							alert(`Nivell completat! Puntuació acumulada: ${this.score}`);
+							let currentOptions = JSON.parse(sessionStorage.getItem("progressiveOptions") || sessionStorage.getItem("options") || '{"groupSize":2, "pairs":2}');
+							
+							currentOptions.pairs = parseInt(currentOptions.pairs) + 1;
 
-                            let options = JSON.parse(sessionStorage.getItem("options") || '{"groupSize":2, "pairs":2}');
-                            options.pairs = parseInt(options.pairs) + 1;
+							if (currentOptions.pairs > 6) {
+								currentOptions.pairs = 2;
+								currentOptions.groupSize = parseInt(currentOptions.groupSize) + 1;
+							}
 
-                            if (options.pairs > 6) {
-                                options.pairs = 2;
-                                options.groupSize = parseInt(options.groupSize) + 1;
-                            }
+							sessionStorage.setItem("progressiveOptions", JSON.stringify(currentOptions));
+							sessionStorage.setItem("puntsAcumulats", this.score);
 
-                            sessionStorage.setItem("options", JSON.stringify(options));
-                            sessionStorage.setItem("puntsAcumulats", this.score);
-
-                            window.location.reload();
-
-                        } else {
+							window.location.reload();
+						} else {
                             alert(`Victòria! Puntuació final: ${this.score}`);
                             
                             let alias = sessionStorage.getItem("alias") || "Anònim";
