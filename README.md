@@ -1,5 +1,9 @@
 i. Introducció
+Aquest projecte consisteix en la creació d'un joc de "Memory" clàssic desenvolupat exclusivament amb HTML, CSS i JavaScript. El joc permet a l'usuari posar a prova la seva memòria trobant grups de cartes iguals i inclou dos modes de joc: un Mode Personalitzat (on es pot triar la dificultat i la mida dels grups) i un Mode Progressiu (on la dificultat augmenta automàticament a cada nivell).
 ii. Descripció del disseny del joc
+El disseny visual s'ha pensat per ser senzill, intuïtiu i estèticament agradable. S'ha utilitzat un fons ataronjat amb una tipografia cursiva per als títols. Les pantalles secundàries (Opcions i Rànquing) utilitzen requadres blancs centrals amb tipografia estàndard per garantir una bona llegibilitat. Per complir amb els requisits, no s'han utilitzat imatges externes (.png o .jpg). Totes les cartes estan dibuixades completament a través de codi vectorial SVG.
 iii. Descripció de les parts més rellevants de la implementació
+Emmagatzematge (Storage): S'ha fet una divisió clara entre el sessionStorage (que guarda de manera temporal l'àlies, el mode de joc i els punts acumulats de la sessió actual) i el localStorage (que guarda de manera persistent l'array d'objectes amb el rànquing històric i les partides a mig fer).
+Lògica de Grups: S'ha adaptat l'algorisme clàssic de parelles perquè pugui avaluar dinàmicament grups de 2 (Parelles), 3 (Trios) o 4 (Quartets) cartes mitjançant un array temporal (currentSelection).
 iv. Conclusions i problemes trobats
-
+Al principi, hi va haver problemes perquè es barrejaven lectures i escriptures entre el localStorage i el sessionStorage, fet que provocava que les opcions seleccionades al menú no s'apliquessin al taulell de joc. Es va solucionar unificant la lògica de configuració al sessionStorage. També, en aplicar el full d'estils principal a les noves finestres, la lletra cursiva trencava la llegibilitat dels formularis i la taula de rànquings. Ho vaig resoldre modularitzant el main.css i aplicant estils específics a les caixes de contingut.
